@@ -1,4 +1,4 @@
-FROM jenkins
+FROM debian:jessie
 
 # prepare docker repo
 RUN apt-get purge -y lxc-docker* \
