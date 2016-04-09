@@ -1,3 +1,4 @@
+# This file can build a jenkis-slave with node, docker and python env.
 FROM debian:jessie
 
 # Update packages
@@ -18,16 +19,16 @@ RUN apt-get update \
     && gpasswd -a jenkins docker
     
 # install nodejs via nvm
-RUN apt-get install -y build-essential libssl-dev \
-    && curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash \
-    && nvm install stable \
-    && nvm use stable
+RUN apt-get install -y build-essential libssl-dev curl \
+    && curl https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+RUN /root/.nvm/nvm.sh install stable \
+    && /root/.nvm/nvm.sh use stable
 
 # install python
 RUN apt-get install -y python python3
 
 # Add backports
-RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list
+RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list && apt-get update
 
 # Install java
 RUN apt-get -t jessie-backports install -y openjdk-8-jdk
