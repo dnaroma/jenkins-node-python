@@ -10,9 +10,7 @@ RUN apt-get update \
 # install docker engine and start daemon, add jenkins user to docker group
 RUN apt-get update \ 
     && apt-get install -y docker-engine \
-    && groupadd docker \
     && gpasswd -a jenkins docker \
-    && service docker start
     
 # install nodejs via nvm
 RUN apt-get install -y build-essential libssl-dev \
@@ -41,4 +39,4 @@ RUN adduser --quiet jenkins && echo "jenkins:jenkins" | chpasswd
 ENV CI=true
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd", "-D"]
+ENTRYPOINT ["./entrypoint.sh"]
