@@ -15,7 +15,7 @@ RUN adduser --quiet jenkins && echo "jenkins:jenkins" | chpasswd
 # install docker engine and start daemon, add jenkins user to docker group
 RUN apt-get update \ 
     && apt-get install -y docker-engine \
-    && gpasswd -a jenkins docker \
+    && gpasswd -a jenkins docker
     
 # install nodejs via nvm
 RUN apt-get install -y build-essential libssl-dev \
