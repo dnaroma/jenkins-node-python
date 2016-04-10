@@ -39,4 +39,7 @@ RUN apt-get install -y git openssh-server && mkdir /var/run/sshd
 ENV CI=true
 EXPOSE 22
 
-ENTRYPOINT ["./entrypoint.sh"]
+ADD entrypoint.sh /tmp/
+RUN chmod +x /tmp/entrypoint.sh
+
+ENTRYPOINT ["/tmp/entrypoint.sh"]
